@@ -1,0 +1,72 @@
+<resources>
+    <string name="app_name">Umlindi</string>
+
+    <string name="login_title">Ngena ku-Umlindi</string>
+    <string name="email_hint">I-imeyili</string>
+    <string name="password_hint">Iphasiwedi</string>
+    <string name="login_button">Ngena</string>
+    <string name="go_to_register">Awunayo i-akhawunti? Bhalisa</string>
+    <string name="error_invalid_email">Sicela ufake i-imeyili evumelekile.</string>
+    <string name="error_short_password">Iphasiwedi kumele ibe okungenani nezinhlamvu ezi-6.</string>
+    <string name="error_login_failed">Ukungena kwehlulekile. Sicela uzame futhi.</string>
+
+    <string name="register_title">Dala i-akhawunti</string>
+    <string name="register_subtitle">Joyina umphakathi wakho usize ukuwuvikela.</string>
+    <string name="display_name_hint">Igama elibonakalayo</string>
+    <string name="email_address_hint">Ikheli le-imeyili</string>
+    <string name="confirm_password_hint">Qinisekisa iphasiwedi</string>
+    <string name="use_current_location">Sebenzisa indawo yamanje</string>
+    <string name="home_location_not_set">Indawo yasekhaya ayikasethwa</string>
+    <string name="create_account">Dala i-akhawunti</string>
+    <string name="go_to_login">Unayo i-akhawunti? Ngena</string>
+    <string name="error_display_name">Sicela ufake igama elibonakalayo.</string>
+    <string name="error_passwords_mismatch">Amaphasiwedi awafani.</string>
+    <string name="error_registration_failed">Ukubhalisa kwehlulekile.</string>
+    <string name="error_profile_save_failed">I-akhawunti idaliwe, kodwa ukulondoloza iphrofayela kwehlulekile: %1$s</string>
+    <string name="location_permission_granted">Imvume yendawo inikeziwe. Thinta inkinobho ukuze uthole indawo.</string>
+    <string name="getting_location">Kutholwa indawo…</string>
+    <string name="location_fetch_failed">Ayikwazanga ukuthola indawo. Hlola ukuthi i-GPS ivuliwe.</string>
+    <string name="home_location_set">Indawo yasekhaya isethiwe (%1$s, %2$s)</string>
+
+    <string name="home_title">Izexwayiso zakamuva</string>
+    <string name="home_empty">Azikho izimemezelo eziseduze okwamanje</string>
+    <string name="content_settings">Izilungiselelo</string>
+    <string name="content_report_incident">Bika isigameko</string>
+
+    <string name="report_category">Isigaba</string>
+    <string name="report_description">Incazelo</string>
+    <string name="report_description_hint">Chaza ukuthi kwenzekeni...</string>
+    <string name="report_location">Indawo</string>
+    <string name="report_location_not_set">Indawo ayikasethwa</string>
+    <string name="report_submit">Thumela umbiko</string>
+    <string name="category_break_in">Ukugqekeza kuyaqhubeka</string>
+    <string name="category_suspicious">Isenzo esisolisayo</string>
+    <string name="category_load_shedding">Ingozi yokucisha kukagesi</string>
+    <string name="category_other">Okunye</string>
+    <string name="error_describe">Sicela uchaze ukuthi kwenzekeni (kuze kufike ezinhlamvini ezingu-500).</string>
+    <string name="error_set_location">Sicela usethe indawo yalo mbiko.</string>
+    <string name="error_not_logged_in">Kumele ungene ukuze uthumele umbiko.</string>
+    <string name="toast_saved_offline">Awukho ku-inthanethi. Umbiko ulondolozwe futhi uzohlanganiswa ngokuzenzakalelayo.</string>
+    <string name="location_set">Indawo isethiwe (%1$s, %2$s)</string>
+
+    <string name="settings_title">Izilungiselelo</string>
+    <string name="settings_display_name">Igama elibonakalayo</string>
+    <string name="settings_alert_radius">Ububanzi bezexwayiso (km)</string>
+    <string name="settings_language">Ulimi</string>
+    <string name="settings_home_location">Indawo yasekhaya</string>
+    <string name="settings_update_location">Buyekeza ngendawo yamanje</string>
+    <string name="settings_save">Londoloza izilungiselelo</string>
+    <string name="settings_saved">Izilungiselelo zilondolozwe</string>
+    <string name="settings_logout">Phuma</string>
+    <string name="settings_no_home_location">Alikho indawo yasekhaya</string>
+    <string name="settings_current_location">Yamanje: (%1$s, %2$s)</string>
+    <string name="settings_new_location">Indawo entsha isethiwe (%1$s, %2$s). Thinta Londoloza ukuze uqinisekise.</string>
+    <string name="error_settings_load">Ayikwazanga ukulayisha izilungiselelo.</string>
+    <string name="error_display_name_empty">Igama elibonakalayo alikwazi ukushiywa lingenalutho.</string>
+    <string name="error_radius_invalid">Sicela ufake ububanzi obuvumelekile.</string>
+    <string name="error_settings_save">Ukulondoloza izilungiselelo kwehlulekile.</string>
+
+    <string name="time_just_now">Khona manje</string>
+    <string name="time_minutes_ago">%1$d min edlule</string>
+    <string name="time_hours_ago">%1$d hr edlule</string>
+</resources>

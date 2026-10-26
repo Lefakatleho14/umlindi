@@ -3,23 +3,25 @@ package com.project.umlindi.ui.auth
 import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Bundle
-import android.util.Patterns
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.ProgressBar
 import android.widget.TextView
-import androidx.core.content.ContextCompat
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.google.android.gms.location.CurrentLocationRequest
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.location.Priority
 import com.google.android.material.textfield.TextInputEditText
+import com.google.firebase.Timestamp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.GeoPoint
 import com.project.umlindi.R
+import com.project.umlindi.util.Validators
 
 class RegisterFragment : Fragment(R.layout.fragment_register) {
 
@@ -62,20 +64,20 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
             val password = etPassword.text?.toString().orEmpty()
             val confirmPassword = etConfirmPassword.text?.toString().orEmpty()
 
-            if (displayName.isEmpty()) {
-                showError(tvError, "Please enter a display name.")
+            if (!Validators.isValidDisplayName(displayName)) {
+                showError(tvError, getString(R.string.error_display_name))
                 return@setOnClickListener
             }
-            if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-                showError(tvError, "Please enter a valid email address.")
+            if (!Validators.isValidEmail(email)) {
+                showError(tvError, getString(R.string.error_invalid_email))
                 return@setOnClickListener
             }
-            if (password.length < 6) {
-                showError(tvError, "Password must be at least 6 characters.")
+            if (!Validators.isValidPassword(password)) {
+                showError(tvError, getString(R.string.error_short_password))
                 return@setOnClickListener
             }
-            if (password != confirmPassword) {
-                showError(tvError, "Passwords do not match.")
+            if (!Validators.passwordsMatch(password, confirmPassword)) {
+                showError(tvError, getString(R.string.error_passwords_mismatch))
                 return@setOnClickListener
             }
 
@@ -86,6 +88,7 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
                         val uid = auth.currentUser?.uid ?: return@addOnCompleteListener
+                        Log.d(TAG, "Account created")
                         val userDoc = hashMapOf(
                             "displayName" to displayName,
                             "email" to email,
@@ -93,22 +96,31 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
                             "alertRadiusKm" to 5.0,
                             "preferredLanguage" to "en",
                             "trustScore" to 0,
-                            "createdAt" to com.google.firebase.Timestamp.now()
+                            "createdAt" to Timestamp.now()
                         )
                         firestore.collection("users").document(uid).set(userDoc)
                             .addOnSuccessListener {
+                                Log.d(TAG, "Profile saved")
                                 progressBar.visibility = View.GONE
                                 findNavController().navigate(R.id.action_register_to_home)
                             }
                             .addOnFailureListener { e ->
+                                Log.e(TAG, "Profile save failed", e)
                                 progressBar.visibility = View.GONE
                                 btnCreateAccount.isEnabled = true
-                                showError(tvError, "Account created, but saving profile failed: ${e.localizedMessage}")
+                                showError(
+                                    tvError,
+                                    getString(R.string.error_profile_save_failed, e.localizedMessage ?: "")
+                                )
                             }
                     } else {
+                        Log.e(TAG, "Registration failed", task.exception)
                         progressBar.visibility = View.GONE
                         btnCreateAccount.isEnabled = true
-                        showError(tvError, task.exception?.localizedMessage ?: "Registration failed.")
+                        showError(
+                            tvError,
+                            task.exception?.localizedMessage ?: getString(R.string.error_registration_failed)
+                        )
                     }
                 }
         }
@@ -117,7 +129,7 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
                 requireContext(), Manifest.permission.ACCESS_FINE_LOCATION
             ) == PackageManager.PERMISSION_GRANTED
         ) {
-            tvLocationStatus.text = "Location permission granted — tap button to fetch"
+            tvLocationStatus.text = getString(R.string.location_permission_granted)
         }
     }
 
@@ -134,7 +146,7 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
             if (location != null) {
                 applyLocation(location.latitude, location.longitude)
             } else {
-                statusView?.text = "Getting location…"
+                statusView?.text = getString(R.string.getting_location)
                 val request = CurrentLocationRequest.Builder()
                     .setPriority(Priority.PRIORITY_HIGH_ACCURACY)
                     .build()
@@ -143,7 +155,7 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
                         if (freshLocation != null) {
                             applyLocation(freshLocation.latitude, freshLocation.longitude)
                         } else {
-                            statusView?.text = "Could not fetch location — check GPS is enabled"
+                            statusView?.text = getString(R.string.location_fetch_failed)
                         }
                     }
             }
@@ -153,11 +165,15 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
     private fun applyLocation(lat: Double, lng: Double) {
         homeLocation = GeoPoint(lat, lng)
         view?.findViewById<TextView>(R.id.tvLocationStatus)?.text =
-            "Home location set (${"%.4f".format(lat)}, ${"%.4f".format(lng)})"
+            getString(R.string.home_location_set, "%.4f".format(lat), "%.4f".format(lng))
     }
 
     private fun showError(tvError: TextView, message: String) {
         tvError.text = message
         tvError.visibility = View.VISIBLE
+    }
+
+    companion object {
+        private const val TAG = "RegisterFragment"
     }
 }

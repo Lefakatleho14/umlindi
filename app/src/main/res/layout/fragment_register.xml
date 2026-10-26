@@ -12,7 +12,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Create Account"
+            android:text="@string/register_title"
             android:textSize="22sp"
             android:textStyle="bold"
             android:layout_marginBottom="4dp" />
@@ -20,7 +20,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Join your community and help keep it safe."
+            android:text="@string/register_subtitle"
             android:layout_marginBottom="20dp" />
 
         <com.google.android.material.textfield.TextInputLayout
@@ -30,7 +30,7 @@
                 android:id="@+id/etDisplayName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Display name"
+                android:hint="@string/display_name_hint"
                 android:inputType="textPersonName" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -42,7 +42,7 @@
                 android:id="@+id/etEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Email address"
+                android:hint="@string/email_address_hint"
                 android:inputType="textEmailAddress" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -54,7 +54,7 @@
                 android:id="@+id/etPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Password"
+                android:hint="@string/password_hint"
                 android:inputType="textPassword" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -66,7 +66,7 @@
                 android:id="@+id/etConfirmPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Confirm password"
+                android:hint="@string/confirm_password_hint"
                 android:inputType="textPassword" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -74,14 +74,14 @@
             android:id="@+id/btnUseLocation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Use current location"
+            android:text="@string/use_current_location"
             android:layout_marginTop="16dp" />
 
         <TextView
             android:id="@+id/tvLocationStatus"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Home location not set"
+            android:text="@string/home_location_not_set"
             android:layout_marginTop="4dp"
             android:textColor="#666666" />
 
@@ -97,7 +97,7 @@
             android:id="@+id/btnCreateAccount"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Create Account"
+            android:text="@string/create_account"
             android:layout_marginTop="16dp" />
 
         <ProgressBar
@@ -112,7 +112,7 @@
             android:id="@+id/tvGoToLogin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Already have an account? Log in"
+            android:text="@string/go_to_login"
             android:layout_marginTop="20dp"
             android:layout_gravity="center_horizontal"
             android:textColor="#1565C0" />

@@ -1,20 +1,21 @@
 package com.project.umlindi.util
 
+import com.project.umlindi.R
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
 class ReportFormatterTest {
 
     @Test
-    fun `known categories map to readable labels`() {
-        assertEquals("Break-in in progress", ReportFormatter.formatCategory("break_in"))
-        assertEquals("Suspicious activity", ReportFormatter.formatCategory("suspicious_activity"))
-        assertEquals("Load-shedding risk", ReportFormatter.formatCategory("load_shedding_risk"))
+    fun `known categories map to their string resources`() {
+        assertEquals(R.string.category_break_in, ReportFormatter.categoryLabelRes("break_in"))
+        assertEquals(R.string.category_suspicious, ReportFormatter.categoryLabelRes("suspicious_activity"))
+        assertEquals(R.string.category_load_shedding, ReportFormatter.categoryLabelRes("load_shedding_risk"))
     }
 
     @Test
-    fun `unknown category falls back to Other incident`() {
-        assertEquals("Other incident", ReportFormatter.formatCategory("something_else"))
+    fun `unknown category falls back to other`() {
+        assertEquals(R.string.category_other, ReportFormatter.categoryLabelRes("something_else"))
     }
 
     @Test
@@ -25,15 +26,15 @@ class ReportFormatterTest {
     }
 
     @Test
-    fun `time ago formats correctly relative to a fixed now`() {
+    fun `time ago is classified relative to a fixed now`() {
         val now = 1_000_000_000L
-        assertEquals("Just now", ReportFormatter.formatTimeAgo(now - 30_000, now)) // 30 sec ago
-        assertEquals("5 min ago", ReportFormatter.formatTimeAgo(now - 5 * 60_000, now))
-        assertEquals("2 hr ago", ReportFormatter.formatTimeAgo(now - 2 * 60 * 60_000, now))
+        assertEquals(TimeAgo.JustNow, ReportFormatter.timeAgo(now - 30_000, now))
+        assertEquals(TimeAgo.Minutes(5), ReportFormatter.timeAgo(now - 5 * 60_000, now))
+        assertEquals(TimeAgo.Hours(2), ReportFormatter.timeAgo(now - 2 * 60 * 60_000, now))
     }
 
     @Test
-    fun `null timestamp returns empty string`() {
-        assertEquals("", ReportFormatter.formatTimeAgo(null))
+    fun `null timestamp is unknown`() {
+        assertEquals(TimeAgo.Unknown, ReportFormatter.timeAgo(null))
     }
 }

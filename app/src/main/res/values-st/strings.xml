@@ -1,0 +1,72 @@
+<resources>
+    <string name="app_name">Umlindi</string>
+
+    <string name="login_title">Kena ho Umlindi</string>
+    <string name="email_hint">Imeile</string>
+    <string name="password_hint">Phasewete</string>
+    <string name="login_button">Kena</string>
+    <string name="go_to_register">Ha u na akhaonto? Ngodisa</string>
+    <string name="error_invalid_email">Ka kopo kenya aterese ea imeile e nepahetseng.</string>
+    <string name="error_short_password">Phasewete e tlameha ho ba le bonyane litlhaku tse 6.</string>
+    <string name="error_login_failed">Ho kena ho hlolehile. Ka kopo leka hape.</string>
+
+    <string name="register_title">Theha akhaonto</string>
+    <string name="register_subtitle">Kenela sechaba sa heno \'me u thuse ho se boloka se bolokehile.</string>
+    <string name="display_name_hint">Lebitso la ho bontša</string>
+    <string name="email_address_hint">Aterese ea imeile</string>
+    <string name="confirm_password_hint">Netefatsa phasewete</string>
+    <string name="use_current_location">Sebelisa sebaka sa hajoale</string>
+    <string name="home_location_not_set">Sebaka sa lehae ha se so behoe</string>
+    <string name="create_account">Theha akhaonto</string>
+    <string name="go_to_login">U se na le akhaonto? Kena</string>
+    <string name="error_display_name">Ka kopo kenya lebitso la ho bontša.</string>
+    <string name="error_passwords_mismatch">Liphasewete ha li tšoane.</string>
+    <string name="error_registration_failed">Ho ngodisa ho hlolehile.</string>
+    <string name="error_profile_save_failed">Akhaonto e entsoe, empa ho boloka profaele ho hlolehile: %1$s</string>
+    <string name="location_permission_granted">Tumello ea sebaka e filoe. Tobetsa konopo ho fumana sebaka.</string>
+    <string name="getting_location">Ho fumana sebaka…</string>
+    <string name="location_fetch_failed">Ha ho a khoneha ho fumana sebaka. Sheba hore GPS e butsoe.</string>
+    <string name="home_location_set">Sebaka sa lehae se behiloe (%1$s, %2$s)</string>
+
+    <string name="home_title">Litemoso tsa morao tjena</string>
+    <string name="home_empty">Ha ho litlaleho tse haufi ho fihlela joale</string>
+    <string name="content_settings">Litlhophiso</string>
+    <string name="content_report_incident">Tlaleha ketsahalo</string>
+
+    <string name="report_category">Sehlopha</string>
+    <string name="report_description">Tlhaloso</string>
+    <string name="report_description_hint">Hlalosa se etsahetseng...</string>
+    <string name="report_location">Sebaka</string>
+    <string name="report_location_not_set">Sebaka ha se so behoe</string>
+    <string name="report_submit">Romela tlaleho</string>
+    <string name="category_break_in">Ho robeloa ho ntse ho etsahala</string>
+    <string name="category_suspicious">Boitšoaro bo belaetsang</string>
+    <string name="category_load_shedding">Kotsi ea ho tima motlakase</string>
+    <string name="category_other">Tse ling</string>
+    <string name="error_describe">Ka kopo hlalosa se etsahetseng (ho fihla ho litlhaku tse 500).</string>
+    <string name="error_set_location">Ka kopo beha sebaka sa tlaleho ena.</string>
+    <string name="error_not_logged_in">U tlameha ho kena ho romela tlaleho.</string>
+    <string name="toast_saved_offline">Ha ho inthanete. Tlaleho e bolokiloe \'me e tla kopanngoa ka boikemelo.</string>
+    <string name="location_set">Sebaka se behiloe (%1$s, %2$s)</string>
+
+    <string name="settings_title">Litlhophiso</string>
+    <string name="settings_display_name">Lebitso la ho bontša</string>
+    <string name="settings_alert_radius">Lekhalo la litemoso (km)</string>
+    <string name="settings_language">Puo</string>
+    <string name="settings_home_location">Sebaka sa lehae</string>
+    <string name="settings_update_location">Ntlafatsa ho sebaka sa hajoale</string>
+    <string name="settings_save">Boloka litlhophiso</string>
+    <string name="settings_saved">Litlhophiso li bolokiloe</string>
+    <string name="settings_logout">Tsoa</string>
+    <string name="settings_no_home_location">Ha ho sebaka sa lehae</string>
+    <string name="settings_current_location">Hajoale: (%1$s, %2$s)</string>
+    <string name="settings_new_location">Sebaka se secha se behiloe (%1$s, %2$s). Tobetsa Boloka ho netefatsa.</string>
+    <string name="error_settings_load">Ha ho a khoneha ho laela litlhophiso.</string>
+    <string name="error_display_name_empty">Lebitso la ho bontša ha le a lokela ho siuoa le se na letho.</string>
+    <string name="error_radius_invalid">Ka kopo kenya lekhalo le nepahetseng.</string>
+    <string name="error_settings_save">Ho boloka litlhophiso ho hlolehile.</string>
+
+    <string name="time_just_now">Hona joale</string>
+    <string name="time_minutes_ago">%1$d min e fetileng</string>
+    <string name="time_hours_ago">%1$d hr e fetileng</string>
+</resources>

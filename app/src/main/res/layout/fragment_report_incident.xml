@@ -12,7 +12,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Category"
+            android:text="@string/report_category"
             android:textStyle="bold"
             android:layout_marginBottom="4dp" />
 
@@ -24,7 +24,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Description"
+            android:text="@string/report_description"
             android:textStyle="bold"
             android:layout_marginTop="20dp" />
 
@@ -33,7 +33,7 @@
             android:layout_width="match_parent"
             android:layout_height="120dp"
             android:gravity="top|start"
-            android:hint="Describe what happened..."
+            android:hint="@string/report_description_hint"
             android:inputType="textMultiLine"
             android:maxLength="500" />
 
@@ -49,7 +49,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Location"
+            android:text="@string/report_location"
             android:textStyle="bold"
             android:layout_marginTop="12dp" />
 
@@ -57,13 +57,13 @@
             android:id="@+id/btnUseLocation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Use current location" />
+            android:text="@string/use_current_location" />
 
         <TextView
             android:id="@+id/tvLocationStatus"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Location not set"
+            android:text="@string/report_location_not_set"
             android:textColor="#666666"
             android:layout_marginTop="4dp" />
 
@@ -79,7 +79,7 @@
             android:id="@+id/btnSubmit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Submit Report"
+            android:text="@string/report_submit"
             android:layout_marginTop="20dp" />
 
         <ProgressBar

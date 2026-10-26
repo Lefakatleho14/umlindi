@@ -1,3 +1,72 @@
 <resources>
     <string name="app_name">Umlindi</string>
+
+    <string name="login_title">Log in to Umlindi</string>
+    <string name="email_hint">Email</string>
+    <string name="password_hint">Password</string>
+    <string name="login_button">Log in</string>
+    <string name="go_to_register">Don\'t have an account? Register</string>
+    <string name="error_invalid_email">Please enter a valid email address.</string>
+    <string name="error_short_password">Password must be at least 6 characters.</string>
+    <string name="error_login_failed">Login failed. Please try again.</string>
+
+    <string name="register_title">Create Account</string>
+    <string name="register_subtitle">Join your community and help keep it safe.</string>
+    <string name="display_name_hint">Display name</string>
+    <string name="email_address_hint">Email address</string>
+    <string name="confirm_password_hint">Confirm password</string>
+    <string name="use_current_location">Use current location</string>
+    <string name="home_location_not_set">Home location not set</string>
+    <string name="create_account">Create Account</string>
+    <string name="go_to_login">Already have an account? Log in</string>
+    <string name="error_display_name">Please enter a display name.</string>
+    <string name="error_passwords_mismatch">Passwords do not match.</string>
+    <string name="error_registration_failed">Registration failed.</string>
+    <string name="error_profile_save_failed">Account created, but saving profile failed: %1$s</string>
+    <string name="location_permission_granted">Location permission granted. Tap the button to fetch.</string>
+    <string name="getting_location">Getting location…</string>
+    <string name="location_fetch_failed">Could not fetch location. Check GPS is enabled.</string>
+    <string name="home_location_set">Home location set (%1$s, %2$s)</string>
+
+    <string name="home_title">Recent Alerts</string>
+    <string name="home_empty">No reports nearby yet</string>
+    <string name="content_settings">Settings</string>
+    <string name="content_report_incident">Report an incident</string>
+
+    <string name="report_category">Category</string>
+    <string name="report_description">Description</string>
+    <string name="report_description_hint">Describe what happened...</string>
+    <string name="report_location">Location</string>
+    <string name="report_location_not_set">Location not set</string>
+    <string name="report_submit">Submit Report</string>
+    <string name="category_break_in">Break-in in progress</string>
+    <string name="category_suspicious">Suspicious activity</string>
+    <string name="category_load_shedding">Load-shedding risk</string>
+    <string name="category_other">Other</string>
+    <string name="error_describe">Please describe what happened (up to 500 characters).</string>
+    <string name="error_set_location">Please set a location for this report.</string>
+    <string name="error_not_logged_in">You must be logged in to submit a report.</string>
+    <string name="toast_saved_offline">No connection. Report saved offline and will sync automatically.</string>
+    <string name="location_set">Location set (%1$s, %2$s)</string>
+
+    <string name="settings_title">Settings</string>
+    <string name="settings_display_name">Display name</string>
+    <string name="settings_alert_radius">Alert radius (km)</string>
+    <string name="settings_language">Language</string>
+    <string name="settings_home_location">Home location</string>
+    <string name="settings_update_location">Update to current location</string>
+    <string name="settings_save">Save Settings</string>
+    <string name="settings_saved">Settings saved</string>
+    <string name="settings_logout">Log out</string>
+    <string name="settings_no_home_location">No home location set</string>
+    <string name="settings_current_location">Current: (%1$s, %2$s)</string>
+    <string name="settings_new_location">New location set (%1$s, %2$s). Tap Save to confirm.</string>
+    <string name="error_settings_load">Could not load settings.</string>
+    <string name="error_display_name_empty">Display name cannot be empty.</string>
+    <string name="error_radius_invalid">Please enter a valid alert radius.</string>
+    <string name="error_settings_save">Failed to save settings.</string>
+
+    <string name="time_just_now">Just now</string>
+    <string name="time_minutes_ago">%1$d min ago</string>
+    <string name="time_hours_ago">%1$d hr ago</string>
 </resources>

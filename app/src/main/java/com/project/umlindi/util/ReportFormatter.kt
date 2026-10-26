@@ -1,14 +1,22 @@
 package com.project.umlindi.util
 
+import com.project.umlindi.R
 import java.util.concurrent.TimeUnit
+
+sealed interface TimeAgo {
+    data object Unknown : TimeAgo
+    data object JustNow : TimeAgo
+    data class Minutes(val count: Long) : TimeAgo
+    data class Hours(val count: Long) : TimeAgo
+}
 
 object ReportFormatter {
 
-    fun formatCategory(raw: String): String = when (raw) {
-        "break_in" -> "Break-in in progress"
-        "suspicious_activity" -> "Suspicious activity"
-        "load_shedding_risk" -> "Load-shedding risk"
-        else -> "Other incident"
+    fun categoryLabelRes(category: String): Int = when (category) {
+        "break_in" -> R.string.category_break_in
+        "suspicious_activity" -> R.string.category_suspicious
+        "load_shedding_risk" -> R.string.category_load_shedding
+        else -> R.string.category_other
     }
 
     fun severityColorHex(category: String): String = when (category) {
@@ -17,14 +25,13 @@ object ReportFormatter {
         else -> "#FBC02D"
     }
 
-    fun formatTimeAgo(timestampMillis: Long?, nowMillis: Long = System.currentTimeMillis()): String {
-        if (timestampMillis == null) return ""
-        val diff = nowMillis - timestampMillis
-        val minutes = TimeUnit.MILLISECONDS.toMinutes(diff)
+    fun timeAgo(timestampMillis: Long?, nowMillis: Long = System.currentTimeMillis()): TimeAgo {
+        if (timestampMillis == null) return TimeAgo.Unknown
+        val minutes = TimeUnit.MILLISECONDS.toMinutes(nowMillis - timestampMillis)
         return when {
-            minutes < 1 -> "Just now"
-            minutes < 60 -> "$minutes min ago"
-            else -> "${TimeUnit.MINUTES.toHours(minutes)} hr ago"
+            minutes < 1 -> TimeAgo.JustNow
+            minutes < 60 -> TimeAgo.Minutes(minutes)
+            else -> TimeAgo.Hours(TimeUnit.MINUTES.toHours(minutes))
         }
     }
 }

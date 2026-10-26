@@ -3,6 +3,7 @@ package com.project.umlindi.ui.settings
 import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.Button
@@ -10,7 +11,9 @@ import android.widget.ProgressBar
 import android.widget.Spinner
 import android.widget.TextView
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContextCompat
+import androidx.core.os.LocaleListCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.google.android.gms.location.CurrentLocationRequest
@@ -21,6 +24,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.GeoPoint
 import com.project.umlindi.R
+import com.project.umlindi.util.Validators
 
 class SettingsFragment : Fragment(R.layout.fragment_settings) {
 
@@ -62,26 +66,28 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
             return
         }
 
-        // Load current settings
         firestore.collection("users").document(uid).get()
             .addOnSuccessListener { doc ->
                 etDisplayName.setText(doc.getString("displayName") ?: "")
-                val radius = doc.getDouble("alertRadiusKm") ?: 5.0
-                etAlertRadius.setText(radius.toString())
+                etAlertRadius.setText((doc.getDouble("alertRadiusKm") ?: 5.0).toString())
 
                 val lang = doc.getString("preferredLanguage") ?: "en"
                 spinnerLanguage.setSelection(languageCodes.indexOf(lang).coerceAtLeast(0))
 
                 val geo = doc.getGeoPoint("homeLocation")
-                if (geo != null) {
-                    tvLocationStatus.text = "Current: (${"%.4f".format(geo.latitude)}, ${"%.4f".format(geo.longitude)})"
+                tvLocationStatus.text = if (geo != null) {
+                    getString(
+                        R.string.settings_current_location,
+                        "%.4f".format(geo.latitude),
+                        "%.4f".format(geo.longitude)
+                    )
                 } else {
-                    tvLocationStatus.text = "No home location set"
+                    getString(R.string.settings_no_home_location)
                 }
             }
-            .addOnFailureListener {
-                tvError.text = "Could not load settings."
-                tvError.visibility = View.VISIBLE
+            .addOnFailureListener { e ->
+                Log.e(TAG, "Loading settings failed", e)
+                showError(tvError, getString(R.string.error_settings_load))
             }
 
         btnUpdateLocation.setOnClickListener {
@@ -94,15 +100,14 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
 
             val displayName = etDisplayName.text?.toString()?.trim().orEmpty()
             val radiusText = etAlertRadius.text?.toString()?.trim().orEmpty()
-            val radius = radiusText.toDoubleOrNull()
             val language = languageCodes[spinnerLanguage.selectedItemPosition]
 
-            if (displayName.isEmpty()) {
-                showError(tvError, "Display name cannot be empty.")
+            if (!Validators.isValidDisplayName(displayName)) {
+                showError(tvError, getString(R.string.error_display_name_empty))
                 return@setOnClickListener
             }
-            if (radius == null || radius <= 0) {
-                showError(tvError, "Please enter a valid alert radius.")
+            if (!Validators.isValidAlertRadius(radiusText)) {
+                showError(tvError, getString(R.string.error_radius_invalid))
                 return@setOnClickListener
             }
 
@@ -111,21 +116,24 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
 
             val updates = mutableMapOf<String, Any>(
                 "displayName" to displayName,
-                "alertRadiusKm" to radius,
+                "alertRadiusKm" to radiusText.toDouble(),
                 "preferredLanguage" to language
             )
             pendingLocation?.let { updates["homeLocation"] = it }
 
             firestore.collection("users").document(uid).update(updates)
                 .addOnSuccessListener {
+                    Log.d(TAG, "Settings saved, language=$language")
                     progressBar.visibility = View.GONE
                     btnSave.isEnabled = true
                     tvSaved.visibility = View.VISIBLE
+                    AppCompatDelegate.setApplicationLocales(LocaleListCompat.forLanguageTags(language))
                 }
                 .addOnFailureListener { e ->
+                    Log.e(TAG, "Saving settings failed", e)
                     progressBar.visibility = View.GONE
                     btnSave.isEnabled = true
-                    showError(tvError, e.localizedMessage ?: "Failed to save settings.")
+                    showError(tvError, e.localizedMessage ?: getString(R.string.error_settings_save))
                 }
         }
 
@@ -148,7 +156,7 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
             if (location != null) {
                 applyLocation(location.latitude, location.longitude)
             } else {
-                statusView?.text = "Getting location…"
+                statusView?.text = getString(R.string.getting_location)
                 val request = CurrentLocationRequest.Builder()
                     .setPriority(Priority.PRIORITY_HIGH_ACCURACY)
                     .build()
@@ -157,7 +165,7 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
                         if (freshLocation != null) {
                             applyLocation(freshLocation.latitude, freshLocation.longitude)
                         } else {
-                            statusView?.text = "Could not fetch location — check GPS is enabled"
+                            statusView?.text = getString(R.string.location_fetch_failed)
                         }
                     }
             }
@@ -167,11 +175,15 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
     private fun applyLocation(lat: Double, lng: Double) {
         pendingLocation = GeoPoint(lat, lng)
         view?.findViewById<TextView>(R.id.tvLocationStatus)?.text =
-            "New location set (${"%.4f".format(lat)}, ${"%.4f".format(lng)}) — tap Save to confirm"
+            getString(R.string.settings_new_location, "%.4f".format(lat), "%.4f".format(lng))
     }
 
     private fun showError(tvError: TextView, message: String) {
         tvError.text = message
         tvError.visibility = View.VISIBLE
+    }
+
+    companion object {
+        private const val TAG = "SettingsFragment"
     }
 }

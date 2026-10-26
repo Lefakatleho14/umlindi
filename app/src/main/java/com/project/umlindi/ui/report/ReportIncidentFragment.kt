@@ -5,16 +5,24 @@ import android.content.pm.PackageManager
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.ProgressBar
 import android.widget.Spinner
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.work.Constraints
+import androidx.work.ExistingWorkPolicy
+import androidx.work.NetworkType
+import androidx.work.OneTimeWorkRequestBuilder
+import androidx.work.WorkManager
 import com.google.android.gms.location.CurrentLocationRequest
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.location.Priority
@@ -24,6 +32,12 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.GeoPoint
 import com.project.umlindi.R
+import com.project.umlindi.data.local.AppDatabase
+import com.project.umlindi.data.local.PendingReportEntity
+import com.project.umlindi.sync.ReportSyncWorker
+import com.project.umlindi.util.NetworkUtils
+import com.project.umlindi.util.Validators
+import kotlinx.coroutines.launch
 
 class ReportIncidentFragment : Fragment(R.layout.fragment_report_incident) {
 
@@ -31,7 +45,12 @@ class ReportIncidentFragment : Fragment(R.layout.fragment_report_incident) {
     private val firestore = FirebaseFirestore.getInstance()
 
     private val categoryValues = listOf("break_in", "suspicious_activity", "load_shedding_risk", "other")
-    private val categoryLabels = listOf("Break-in in progress", "Suspicious activity", "Load-shedding risk", "Other")
+    private val categoryLabelRes = listOf(
+        R.string.category_break_in,
+        R.string.category_suspicious,
+        R.string.category_load_shedding,
+        R.string.category_other
+    )
 
     private var reportLocation: GeoPoint? = null
 
@@ -53,7 +72,9 @@ class ReportIncidentFragment : Fragment(R.layout.fragment_report_incident) {
         val progressBar = view.findViewById<ProgressBar>(R.id.progressBar)
 
         spinnerCategory.adapter = ArrayAdapter(
-            requireContext(), android.R.layout.simple_spinner_dropdown_item, categoryLabels
+            requireContext(),
+            android.R.layout.simple_spinner_dropdown_item,
+            categoryLabelRes.map { getString(it) }
         )
 
         etDescription.addTextChangedListener(object : TextWatcher {
@@ -74,43 +95,30 @@ class ReportIncidentFragment : Fragment(R.layout.fragment_report_incident) {
             val description = etDescription.text?.toString()?.trim().orEmpty()
             val category = categoryValues[spinnerCategory.selectedItemPosition]
             val userId = auth.currentUser?.uid
+            val location = reportLocation
 
-            if (description.isEmpty()) {
-                showError(tvError, "Please describe what happened.")
+            if (!Validators.isValidDescription(description)) {
+                showError(tvError, getString(R.string.error_describe))
                 return@setOnClickListener
             }
-            if (reportLocation == null) {
-                showError(tvError, "Please set a location for this report.")
+            if (location == null) {
+                showError(tvError, getString(R.string.error_set_location))
                 return@setOnClickListener
             }
             if (userId == null) {
-                showError(tvError, "You must be logged in to submit a report.")
+                showError(tvError, getString(R.string.error_not_logged_in))
                 return@setOnClickListener
             }
 
             progressBar.visibility = View.VISIBLE
             btnSubmit.isEnabled = false
 
-            val report = hashMapOf(
-                "reporterId" to userId,
-                "category" to category,
-                "description" to description,
-                "location" to reportLocation,
-                "status" to "pending",
-                "createdAt" to Timestamp.now(),
-                "updatedAt" to Timestamp.now()
-            )
-
-            firestore.collection("reports").add(report)
-                .addOnSuccessListener {
-                    progressBar.visibility = View.GONE
-                    findNavController().popBackStack()
-                }
-                .addOnFailureListener { e ->
-                    progressBar.visibility = View.GONE
-                    btnSubmit.isEnabled = true
-                    showError(tvError, e.localizedMessage ?: "Failed to submit report.")
-                }
+            if (NetworkUtils.isOnline(requireContext())) {
+                submitOnline(userId, category, description, location)
+            } else {
+                Log.d(TAG, "Offline, queueing report locally")
+                saveReportOffline(userId, category, description, location)
+            }
         }
 
         if (ContextCompat.checkSelfPermission(
@@ -118,6 +126,75 @@ class ReportIncidentFragment : Fragment(R.layout.fragment_report_incident) {
             ) == PackageManager.PERMISSION_GRANTED
         ) {
             fetchCurrentLocation()
+        }
+    }
+
+    private fun submitOnline(
+        userId: String,
+        category: String,
+        description: String,
+        location: GeoPoint
+    ) {
+        val report = hashMapOf(
+            "reporterId" to userId,
+            "category" to category,
+            "description" to description,
+            "location" to location,
+            "status" to "pending",
+            "createdAt" to Timestamp.now(),
+            "updatedAt" to Timestamp.now()
+        )
+
+        firestore.collection("reports").add(report)
+            .addOnSuccessListener {
+                Log.d(TAG, "Report submitted online")
+                view?.findViewById<ProgressBar>(R.id.progressBar)?.visibility = View.GONE
+                findNavController().popBackStack()
+            }
+            .addOnFailureListener { e ->
+                Log.e(TAG, "Online submit failed, queueing locally", e)
+                saveReportOffline(userId, category, description, location)
+            }
+    }
+
+    private fun saveReportOffline(
+        userId: String,
+        category: String,
+        description: String,
+        location: GeoPoint
+    ) {
+        val appContext = requireContext().applicationContext
+        val savedMessage = getString(R.string.toast_saved_offline)
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            AppDatabase.getInstance(appContext).pendingReportDao().insert(
+                PendingReportEntity(
+                    reporterId = userId,
+                    category = category,
+                    description = description,
+                    latitude = location.latitude,
+                    longitude = location.longitude,
+                    createdAtMillis = System.currentTimeMillis()
+                )
+            )
+
+            val syncRequest = OneTimeWorkRequestBuilder<ReportSyncWorker>()
+                .setConstraints(
+                    Constraints.Builder()
+                        .setRequiredNetworkType(NetworkType.CONNECTED)
+                        .build()
+                )
+                .build()
+
+            WorkManager.getInstance(appContext).enqueueUniqueWork(
+                SYNC_WORK_NAME,
+                ExistingWorkPolicy.APPEND_OR_REPLACE,
+                syncRequest
+            )
+
+            view?.findViewById<ProgressBar>(R.id.progressBar)?.visibility = View.GONE
+            Toast.makeText(appContext, savedMessage, Toast.LENGTH_LONG).show()
+            findNavController().popBackStack()
         }
     }
 
@@ -134,7 +211,7 @@ class ReportIncidentFragment : Fragment(R.layout.fragment_report_incident) {
             if (location != null) {
                 applyLocation(location.latitude, location.longitude)
             } else {
-                statusView?.text = "Getting location…"
+                statusView?.text = getString(R.string.getting_location)
                 val request = CurrentLocationRequest.Builder()
                     .setPriority(Priority.PRIORITY_HIGH_ACCURACY)
                     .build()
@@ -143,7 +220,7 @@ class ReportIncidentFragment : Fragment(R.layout.fragment_report_incident) {
                         if (freshLocation != null) {
                             applyLocation(freshLocation.latitude, freshLocation.longitude)
                         } else {
-                            statusView?.text = "Could not fetch location — check GPS is enabled"
+                            statusView?.text = getString(R.string.location_fetch_failed)
                         }
                     }
             }
@@ -153,11 +230,16 @@ class ReportIncidentFragment : Fragment(R.layout.fragment_report_incident) {
     private fun applyLocation(lat: Double, lng: Double) {
         reportLocation = GeoPoint(lat, lng)
         view?.findViewById<TextView>(R.id.tvLocationStatus)?.text =
-            "Location set (${"%.4f".format(lat)}, ${"%.4f".format(lng)})"
+            getString(R.string.location_set, "%.4f".format(lat), "%.4f".format(lng))
     }
 
     private fun showError(tvError: TextView, message: String) {
         tvError.text = message
         tvError.visibility = View.VISIBLE
+    }
+
+    companion object {
+        private const val TAG = "ReportIncident"
+        private const val SYNC_WORK_NAME = "report_sync"
     }
 }

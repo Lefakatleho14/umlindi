@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.project.umlindi.R
 import com.project.umlindi.util.ReportFormatter
+import com.project.umlindi.util.TimeAgo
 
 class ReportsAdapter(private val reports: MutableList<Report> = mutableListOf()) :
     RecyclerView.Adapter<ReportsAdapter.ReportViewHolder>() {
@@ -38,9 +39,16 @@ class ReportsAdapter(private val reports: MutableList<Report> = mutableListOf())
         private val tvTimeAgo: TextView = itemView.findViewById(R.id.tvTimeAgo)
 
         fun bind(report: Report) {
-            tvCategory.text = ReportFormatter.formatCategory(report.category)
+            val context = itemView.context
+
+            tvCategory.text = context.getString(ReportFormatter.categoryLabelRes(report.category))
             tvDescription.text = report.description
-            tvTimeAgo.text = ReportFormatter.formatTimeAgo(report.createdAt?.toDate()?.time)
+            tvTimeAgo.text = when (val ago = ReportFormatter.timeAgo(report.createdAt?.toDate()?.time)) {
+                TimeAgo.Unknown -> ""
+                TimeAgo.JustNow -> context.getString(R.string.time_just_now)
+                is TimeAgo.Minutes -> context.getString(R.string.time_minutes_ago, ago.count.toInt())
+                is TimeAgo.Hours -> context.getString(R.string.time_hours_ago, ago.count.toInt())
+            }
 
             val color = Color.parseColor(ReportFormatter.severityColorHex(report.category))
             (severityDot.background as? GradientDrawable)?.setColor(color)

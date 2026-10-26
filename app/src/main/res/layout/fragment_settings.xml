@@ -12,7 +12,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Settings"
+            android:text="@string/settings_title"
             android:textSize="22sp"
             android:textStyle="bold"
             android:layout_marginBottom="20dp" />
@@ -20,7 +20,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Display name"
+            android:text="@string/settings_display_name"
             android:textStyle="bold" />
 
         <com.google.android.material.textfield.TextInputEditText
@@ -31,7 +31,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Alert radius (km)"
+            android:text="@string/settings_alert_radius"
             android:textStyle="bold"
             android:layout_marginTop="16dp" />
 
@@ -44,7 +44,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Language"
+            android:text="@string/settings_language"
             android:textStyle="bold"
             android:layout_marginTop="16dp" />
 
@@ -56,7 +56,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Home location"
+            android:text="@string/settings_home_location"
             android:textStyle="bold"
             android:layout_marginTop="16dp" />
 
@@ -64,7 +64,7 @@
             android:id="@+id/btnUpdateLocation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Update to current location" />
+            android:text="@string/settings_update_location" />
 
         <TextView
             android:id="@+id/tvLocationStatus"
@@ -88,13 +88,13 @@
             android:textColor="#2E7D32"
             android:layout_marginTop="12dp"
             android:visibility="gone"
-            android:text="Settings saved" />
+            android:text="@string/settings_saved" />
 
         <Button
             android:id="@+id/btnSave"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Save Settings"
+            android:text="@string/settings_save"
             android:layout_marginTop="20dp" />
 
         <ProgressBar
@@ -109,7 +109,7 @@
             android:id="@+id/btnLogout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Log out"
+            android:text="@string/settings_logout"
             android:layout_marginTop="24dp"
             style="?android:attr/buttonStyleSmall" />
 

@@ -1,16 +1,17 @@
 package com.project.umlindi.ui.auth
 
 import android.os.Bundle
-import android.util.Patterns
+import android.util.Log
 import android.view.View
+import android.widget.Button
+import android.widget.ProgressBar
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
 import com.project.umlindi.R
-import android.widget.Button
-import android.widget.ProgressBar
-import android.widget.TextView
+import com.project.umlindi.util.Validators
 
 class LoginFragment : Fragment(R.layout.fragment_login) {
 
@@ -35,14 +36,12 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
             val email = etEmail.text?.toString()?.trim().orEmpty()
             val password = etPassword.text?.toString().orEmpty()
 
-            if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-                tvError.text = "Please enter a valid email address."
-                tvError.visibility = View.VISIBLE
+            if (!Validators.isValidEmail(email)) {
+                showError(tvError, getString(R.string.error_invalid_email))
                 return@setOnClickListener
             }
-            if (password.length < 6) {
-                tvError.text = "Password must be at least 6 characters."
-                tvError.visibility = View.VISIBLE
+            if (!Validators.isValidPassword(password)) {
+                showError(tvError, getString(R.string.error_short_password))
                 return@setOnClickListener
             }
 
@@ -54,13 +53,25 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
                     progressBar.visibility = View.GONE
                     btnLogin.isEnabled = true
                     if (task.isSuccessful) {
+                        Log.d(TAG, "Login succeeded")
                         findNavController().navigate(R.id.action_login_to_home)
                     } else {
-                        tvError.text = task.exception?.localizedMessage
-                            ?: "Login failed. Please try again."
-                        tvError.visibility = View.VISIBLE
+                        Log.e(TAG, "Login failed", task.exception)
+                        showError(
+                            tvError,
+                            task.exception?.localizedMessage ?: getString(R.string.error_login_failed)
+                        )
                     }
                 }
         }
+    }
+
+    private fun showError(tvError: TextView, message: String) {
+        tvError.text = message
+        tvError.visibility = View.VISIBLE
+    }
+
+    companion object {
+        private const val TAG = "LoginFragment"
     }
 }
