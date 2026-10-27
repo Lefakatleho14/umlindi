@@ -25,6 +25,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.GeoPoint
 import com.project.umlindi.R
 import com.project.umlindi.util.Validators
+import com.facebook.login.LoginManager
 
 class SettingsFragment : Fragment(R.layout.fragment_settings) {
 
