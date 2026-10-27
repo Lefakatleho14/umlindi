@@ -10,6 +10,14 @@
     <string name="error_short_password">Iphasiwedi kumele ibe okungenani nezinhlamvu ezi-6.</string>
     <string name="error_login_failed">Ukungena kwehlulekile. Sicela uzame futhi.</string>
 
+    <string name="login_or">NOMA</string>
+    <string name="continue_with_google">Qhubeka ne-Google</string>
+    <string name="error_google_failed">Ukungena nge-Google kwehlulekile. Sicela uzame futhi.</string>
+
+    <string name="continue_with_facebook">Qhubeka ne-Facebook</string>
+    <string name="error_facebook_failed">Ukungena nge-Facebook kwehlulekile. Sicela uzame futhi.</string>
+    <string name="error_account_exists">I-akhawunti isivele ikhona ngale imeyili ngendlela ehlukile yokungena. Ngena ngaleyo ndlela.</string>
+
     <string name="register_title">Dala i-akhawunti</string>
     <string name="register_subtitle">Joyina umphakathi wakho usize ukuwuvikela.</string>
     <string name="display_name_hint">Igama elibonakalayo</string>

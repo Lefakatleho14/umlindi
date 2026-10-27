@@ -141,6 +141,12 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
             auth.signOut()
             findNavController().navigate(R.id.action_settings_to_login)
         }
+
+        btnLogout.setOnClickListener {
+            LoginManager.getInstance().logOut()
+            auth.signOut()
+            findNavController().navigate(R.id.action_settings_to_login)
+        }
     }
 
     private fun fetchCurrentLocation() {

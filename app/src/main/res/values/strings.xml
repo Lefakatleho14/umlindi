@@ -10,6 +10,14 @@
     <string name="error_short_password">Password must be at least 6 characters.</string>
     <string name="error_login_failed">Login failed. Please try again.</string>
 
+    <string name="login_or">OR</string>
+    <string name="continue_with_google">Continue with Google</string>
+    <string name="error_google_failed">Google sign-in failed. Please try again.</string>
+
+    <string name="continue_with_facebook">Continue with Facebook</string>
+    <string name="error_facebook_failed">Facebook sign-in failed. Please try again.</string>
+    <string name="error_account_exists">An account already exists with this email using a different sign-in method. Log in with that method instead.</string>
+
     <string name="register_title">Create Account</string>
     <string name="register_subtitle">Join your community and help keep it safe.</string>
     <string name="display_name_hint">Display name</string>

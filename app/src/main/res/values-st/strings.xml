@@ -10,6 +10,14 @@
     <string name="error_short_password">Phasewete e tlameha ho ba le bonyane litlhaku tse 6.</string>
     <string name="error_login_failed">Ho kena ho hlolehile. Ka kopo leka hape.</string>
 
+    <string name="login_or">KAPA</string>
+    <string name="continue_with_google">Tsoela pele ka Google</string>
+    <string name="error_google_failed">Ho kena ka Google ho hlolehile. Ka kopo leka hape.</string>
+
+    <string name="continue_with_facebook">Tsoela pele ka Facebook</string>
+    <string name="error_facebook_failed">Ho kena ka Facebook ho hlolehile. Ka kopo leka hape.</string>
+    <string name="error_account_exists">Akhaonto e se e ntse e le teng ka imeile ena ka mokhoa o mong oa ho kena. Kena ka mokhoa oo.</string>
+
     <string name="register_title">Theha akhaonto</string>
     <string name="register_subtitle">Kenela sechaba sa heno \'me u thuse ho se boloka se bolokehile.</string>
     <string name="display_name_hint">Lebitso la ho bontša</string>
