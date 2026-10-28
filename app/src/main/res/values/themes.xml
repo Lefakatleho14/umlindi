@@ -1,9 +1,35 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Base.Theme.Umlindi" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+<resources>
+    <style name="Base.Theme.Umlindi" parent="Theme.Material3.Light.NoActionBar">
+        <item name="colorPrimary">@color/teal_primary</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorPrimaryContainer">@color/teal_light</item>
+        <item name="colorOnPrimaryContainer">@color/teal_dark</item>
+        <item name="colorSecondary">@color/teal_dark</item>
+        <item name="colorOnSecondary">@color/white</item>
+        <item name="android:statusBarColor">@color/teal_dark</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="textInputStyle">@style/Widget.Umlindi.TextInputLayout</item>
+        <item name="materialButtonStyle">@style/Widget.Umlindi.Button</item>
     </style>
 
     <style name="Theme.Umlindi" parent="Base.Theme.Umlindi" />
+
+    <style name="Widget.Umlindi.Button" parent="Widget.Material3.Button">
+        <item name="cornerRadius">12dp</item>
+        <item name="android:minHeight">52dp</item>
+    </style>
+
+    <style name="Widget.Umlindi.Button.Outlined" parent="Widget.Material3.Button.OutlinedButton">
+        <item name="cornerRadius">12dp</item>
+        <item name="android:minHeight">52dp</item>
+        <item name="android:textColor">@color/text_primary</item>
+        <item name="strokeColor">@color/divider</item>
+    </style>
+
+    <style name="Widget.Umlindi.TextInputLayout" parent="Widget.Material3.TextInputLayout.OutlinedBox">
+        <item name="boxCornerRadiusTopStart">12dp</item>
+        <item name="boxCornerRadiusTopEnd">12dp</item>
+        <item name="boxCornerRadiusBottomStart">12dp</item>
+        <item name="boxCornerRadiusBottomEnd">12dp</item>
+    </style>
 </resources>

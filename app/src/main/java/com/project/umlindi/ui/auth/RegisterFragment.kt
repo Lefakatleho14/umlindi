@@ -43,7 +43,7 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
         val etEmail = view.findViewById<TextInputEditText>(R.id.etEmail)
         val etPassword = view.findViewById<TextInputEditText>(R.id.etPassword)
         val etConfirmPassword = view.findViewById<TextInputEditText>(R.id.etConfirmPassword)
-        val btnUseLocation = view.findViewById<Button>(R.id.btnUseLocation)
+        val btnUseLocation = view.findViewById<View>(R.id.btnUseLocation)
         val tvLocationStatus = view.findViewById<TextView>(R.id.tvLocationStatus)
         val tvError = view.findViewById<TextView>(R.id.tvError)
         val btnCreateAccount = view.findViewById<Button>(R.id.btnCreateAccount)
@@ -51,6 +51,8 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
         val tvGoToLogin = view.findViewById<TextView>(R.id.tvGoToLogin)
 
         tvGoToLogin.setOnClickListener { findNavController().popBackStack() }
+
+        view.findViewById<View>(R.id.btnBack).setOnClickListener { findNavController().popBackStack() }
 
         btnUseLocation.setOnClickListener {
             requestLocationPermission.launch(Manifest.permission.ACCESS_FINE_LOCATION)

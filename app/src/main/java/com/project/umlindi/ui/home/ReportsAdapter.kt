@@ -6,13 +6,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.core.graphics.ColorUtils
 import androidx.recyclerview.widget.RecyclerView
 import com.project.umlindi.R
 import com.project.umlindi.util.ReportFormatter
-import com.project.umlindi.util.TimeAgo
+import com.project.umlindi.util.toText
 
-class ReportsAdapter(private val reports: MutableList<Report> = mutableListOf()) :
-    RecyclerView.Adapter<ReportsAdapter.ReportViewHolder>() {
+class ReportsAdapter(
+    private val onItemClick: (Report) -> Unit,
+    private val reports: MutableList<Report> = mutableListOf()
+) : RecyclerView.Adapter<ReportsAdapter.ReportViewHolder>() {
 
     fun submitList(newReports: List<Report>) {
         reports.clear()
@@ -27,7 +30,7 @@ class ReportsAdapter(private val reports: MutableList<Report> = mutableListOf())
     }
 
     override fun onBindViewHolder(holder: ReportViewHolder, position: Int) {
-        holder.bind(reports[position])
+        holder.bind(reports[position], onItemClick)
     }
 
     override fun getItemCount() = reports.size
@@ -37,21 +40,25 @@ class ReportsAdapter(private val reports: MutableList<Report> = mutableListOf())
         private val tvCategory: TextView = itemView.findViewById(R.id.tvCategory)
         private val tvDescription: TextView = itemView.findViewById(R.id.tvDescription)
         private val tvTimeAgo: TextView = itemView.findViewById(R.id.tvTimeAgo)
+        private val tvSeverity: TextView = itemView.findViewById(R.id.tvSeverity)
 
-        fun bind(report: Report) {
+        fun bind(report: Report, onItemClick: (Report) -> Unit) {
             val context = itemView.context
 
             tvCategory.text = context.getString(ReportFormatter.categoryLabelRes(report.category))
             tvDescription.text = report.description
-            tvTimeAgo.text = when (val ago = ReportFormatter.timeAgo(report.createdAt?.toDate()?.time)) {
-                TimeAgo.Unknown -> ""
-                TimeAgo.JustNow -> context.getString(R.string.time_just_now)
-                is TimeAgo.Minutes -> context.getString(R.string.time_minutes_ago, ago.count.toInt())
-                is TimeAgo.Hours -> context.getString(R.string.time_hours_ago, ago.count.toInt())
-            }
+            tvTimeAgo.text = ReportFormatter.timeAgo(report.createdAt?.toDate()?.time).toText(context)
 
-            val color = Color.parseColor(ReportFormatter.severityColorHex(report.category))
-            (severityDot.background as? GradientDrawable)?.setColor(color)
+            val dotColor = Color.parseColor(ReportFormatter.severityColorHex(report.category))
+            (severityDot.background.mutate() as? GradientDrawable)?.setColor(dotColor)
+
+            val badgeColor = Color.parseColor(ReportFormatter.severityBadgeColorHex(report.category))
+            tvSeverity.text = context.getString(ReportFormatter.severityLabelRes(report.category))
+            tvSeverity.setTextColor(badgeColor)
+            (tvSeverity.background.mutate() as? GradientDrawable)
+                ?.setColor(ColorUtils.setAlphaComponent(badgeColor, 36))
+
+            itemView.setOnClickListener { onItemClick(report) }
         }
     }
 }

@@ -16,6 +16,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.os.LocaleListCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.facebook.login.LoginManager
 import com.google.android.gms.location.CurrentLocationRequest
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.location.Priority
@@ -25,7 +26,6 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.GeoPoint
 import com.project.umlindi.R
 import com.project.umlindi.util.Validators
-import com.facebook.login.LoginManager
 
 class SettingsFragment : Fragment(R.layout.fragment_settings) {
 
@@ -49,13 +49,18 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
         val etDisplayName = view.findViewById<TextInputEditText>(R.id.etDisplayName)
         val etAlertRadius = view.findViewById<TextInputEditText>(R.id.etAlertRadius)
         val spinnerLanguage = view.findViewById<Spinner>(R.id.spinnerLanguage)
-        val btnUpdateLocation = view.findViewById<Button>(R.id.btnUpdateLocation)
+        val btnUpdateLocation = view.findViewById<View>(R.id.btnUpdateLocation)
         val tvLocationStatus = view.findViewById<TextView>(R.id.tvLocationStatus)
+        val tvTrustScore = view.findViewById<TextView>(R.id.tvTrustScore)
         val tvError = view.findViewById<TextView>(R.id.tvError)
         val tvSaved = view.findViewById<TextView>(R.id.tvSaved)
         val btnSave = view.findViewById<Button>(R.id.btnSave)
         val progressBar = view.findViewById<ProgressBar>(R.id.progressBar)
         val btnLogout = view.findViewById<Button>(R.id.btnLogout)
+
+        view.findViewById<View>(R.id.btnBack).setOnClickListener {
+            findNavController().popBackStack()
+        }
 
         spinnerLanguage.adapter = ArrayAdapter(
             requireContext(), android.R.layout.simple_spinner_dropdown_item, languageLabels
@@ -70,6 +75,10 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
         firestore.collection("users").document(uid).get()
             .addOnSuccessListener { doc ->
                 etDisplayName.setText(doc.getString("displayName") ?: "")
+                tvTrustScore.text = getString(
+                    R.string.trust_score_format,
+                    (doc.getLong("trustScore") ?: 0L).toInt()
+                )
                 etAlertRadius.setText((doc.getDouble("alertRadiusKm") ?: 5.0).toString())
 
                 val lang = doc.getString("preferredLanguage") ?: "en"
@@ -136,11 +145,6 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
                     btnSave.isEnabled = true
                     showError(tvError, e.localizedMessage ?: getString(R.string.error_settings_save))
                 }
-        }
-
-        btnLogout.setOnClickListener {
-            auth.signOut()
-            findNavController().navigate(R.id.action_settings_to_login)
         }
 
         btnLogout.setOnClickListener {

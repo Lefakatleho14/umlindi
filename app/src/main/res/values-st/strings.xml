@@ -1,20 +1,27 @@
 <resources>
     <string name="app_name">Umlindi</string>
 
+    <string name="splash_subtitle">Temoso ea polokeho ea sechaba</string>
+    <string name="splash_tagline">Re boloka sechaba sa rona se sireletsehile, hammoho.</string>
+
     <string name="login_title">Kena ho Umlindi</string>
+    <string name="welcome_back">Rea u amohela hape!</string>
+    <string name="login_subtitle">Ka kopo kena ho tsoela pele.</string>
     <string name="email_hint">Imeile</string>
     <string name="password_hint">Phasewete</string>
     <string name="login_button">Kena</string>
-    <string name="go_to_register">Ha u na akhaonto? Ngodisa</string>
+    <string name="forgot_password">U lebetse phasewete?</string>
+    <string name="reset_email_sent">Imeile ea ho seta phasewete bocha e rometsoe. Sheba ibokosana la hao.</string>
+    <string name="error_enter_email_first">Qala ka ho kenya aterese ea hao ea imeile.</string>
+    <string name="login_or">KAPA</string>
+    <string name="continue_with_google">Tsoela pele ka Google</string>
+    <string name="continue_with_facebook">Tsoela pele ka Facebook</string>
+    <string name="no_account_prompt">Ha u na akhaonto?</string>
+    <string name="go_to_register">Ngodisa</string>
     <string name="error_invalid_email">Ka kopo kenya aterese ea imeile e nepahetseng.</string>
     <string name="error_short_password">Phasewete e tlameha ho ba le bonyane litlhaku tse 6.</string>
     <string name="error_login_failed">Ho kena ho hlolehile. Ka kopo leka hape.</string>
-
-    <string name="login_or">KAPA</string>
-    <string name="continue_with_google">Tsoela pele ka Google</string>
     <string name="error_google_failed">Ho kena ka Google ho hlolehile. Ka kopo leka hape.</string>
-
-    <string name="continue_with_facebook">Tsoela pele ka Facebook</string>
     <string name="error_facebook_failed">Ho kena ka Facebook ho hlolehile. Ka kopo leka hape.</string>
     <string name="error_account_exists">Akhaonto e se e ntse e le teng ka imeile ena ka mokhoa o mong oa ho kena. Kena ka mokhoa oo.</string>
 
@@ -25,8 +32,11 @@
     <string name="confirm_password_hint">Netefatsa phasewete</string>
     <string name="use_current_location">Sebelisa sebaka sa hajoale</string>
     <string name="home_location_not_set">Sebaka sa lehae ha se so behoe</string>
+    <string name="tap_to_use_location">Tobetsa ho sebelisa sebaka sa hajoale</string>
     <string name="create_account">Theha akhaonto</string>
-    <string name="go_to_login">U se na le akhaonto? Kena</string>
+    <string name="have_account_prompt">U se na le akhaonto?</string>
+    <string name="go_to_login">Kena</string>
+    <string name="back">Morao</string>
     <string name="error_display_name">Ka kopo kenya lebitso la ho bontša.</string>
     <string name="error_passwords_mismatch">Liphasewete ha li tšoane.</string>
     <string name="error_registration_failed">Ho ngodisa ho hlolehile.</string>
@@ -77,4 +87,28 @@
     <string name="time_just_now">Hona joale</string>
     <string name="time_minutes_ago">%1$d min e fetileng</string>
     <string name="time_hours_ago">%1$d hr e fetileng</string>
+
+    <string name="nearby_alerts">Litemoso tse haufi</string>
+    <string name="report_screen_title">Tlaleha ketsahalo</string>
+    <string name="section_account">Akhaonto</string>
+    <string name="section_preferences">Likhetho</string>
+    <string name="severity_high">Holimo</string>
+    <string name="severity_medium">Bohareng</string>
+    <string name="severity_low">Tlase</string>
+
+    <string name="alert_detail_title">Lintlha tsa temoso</string>
+    <string name="reported_by">E tlalehiloe ke</string>
+    <string name="trust_score_format">Lintlha tsa tshepo: %1$d</string>
+    <string name="community_feedback">Maikutlo a sechaba</string>
+    <string name="feedback_counts">%1$d ba netefalitseng • %2$d ba hanneng</string>
+    <string name="confirm">Netefatsa</string>
+    <string name="dispute">Hanyetsa</string>
+    <string name="your_report_note">Ena ke tlaleho ea hao. Baahi ba bang ba ka e netefatsa kapa ba e hanyetsa.</string>
+    <string name="you_confirmed">U netefalitse tlaleho ena.</string>
+    <string name="you_disputed">U hanne tlaleho ena.</string>
+    <string name="error_vote_failed">Ha ho a khoneha ho rekota voutu ea hao. Sheba khokahano \'me u leke hape.</string>
+    <string name="distance_km_away">%1$s km hole</string>
+    <string name="distance_m_away">%1$d m hole</string>
+    <string name="report_not_found">Tlaleho ena ha e sa fumaneha.</string>
+    <string name="unknown_reporter">Ha e tsejoe</string>
 </resources>

@@ -55,7 +55,15 @@
         <action
             android:id="@+id/action_home_to_settings"
             app:destination="@id/settingsFragment" />
+        <action
+            android:id="@+id/action_home_to_alertDetail"
+            app:destination="@id/alertDetailFragment" />
     </fragment>
+
+    <fragment
+        android:id="@+id/alertDetailFragment"
+        android:name="com.project.umlindi.ui.detail.AlertDetailFragment"
+        android:label="Alert Detail" />
 
     <fragment
         android:id="@+id/reportIncidentFragment"

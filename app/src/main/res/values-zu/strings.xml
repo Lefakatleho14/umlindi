@@ -1,20 +1,27 @@
 <resources>
     <string name="app_name">Umlindi</string>
 
+    <string name="splash_subtitle">Isexwayiso sokuvikeleka komphakathi</string>
+    <string name="splash_tagline">Sigcina imiphakathi yethu ivikelekile, ndawonye.</string>
+
     <string name="login_title">Ngena ku-Umlindi</string>
+    <string name="welcome_back">Siyakwamukela futhi!</string>
+    <string name="login_subtitle">Sicela ungene ukuze uqhubeke.</string>
     <string name="email_hint">I-imeyili</string>
     <string name="password_hint">Iphasiwedi</string>
     <string name="login_button">Ngena</string>
-    <string name="go_to_register">Awunayo i-akhawunti? Bhalisa</string>
+    <string name="forgot_password">Ukhohlwe iphasiwedi?</string>
+    <string name="reset_email_sent">I-imeyili yokusetha kabusha iphasiwedi ithunyelwe. Hlola ibhokisi lakho.</string>
+    <string name="error_enter_email_first">Qala ngokufaka ikheli lakho le-imeyili.</string>
+    <string name="login_or">NOMA</string>
+    <string name="continue_with_google">Qhubeka ne-Google</string>
+    <string name="continue_with_facebook">Qhubeka ne-Facebook</string>
+    <string name="no_account_prompt">Awunayo i-akhawunti?</string>
+    <string name="go_to_register">Bhalisa</string>
     <string name="error_invalid_email">Sicela ufake i-imeyili evumelekile.</string>
     <string name="error_short_password">Iphasiwedi kumele ibe okungenani nezinhlamvu ezi-6.</string>
     <string name="error_login_failed">Ukungena kwehlulekile. Sicela uzame futhi.</string>
-
-    <string name="login_or">NOMA</string>
-    <string name="continue_with_google">Qhubeka ne-Google</string>
     <string name="error_google_failed">Ukungena nge-Google kwehlulekile. Sicela uzame futhi.</string>
-
-    <string name="continue_with_facebook">Qhubeka ne-Facebook</string>
     <string name="error_facebook_failed">Ukungena nge-Facebook kwehlulekile. Sicela uzame futhi.</string>
     <string name="error_account_exists">I-akhawunti isivele ikhona ngale imeyili ngendlela ehlukile yokungena. Ngena ngaleyo ndlela.</string>
 
@@ -25,8 +32,11 @@
     <string name="confirm_password_hint">Qinisekisa iphasiwedi</string>
     <string name="use_current_location">Sebenzisa indawo yamanje</string>
     <string name="home_location_not_set">Indawo yasekhaya ayikasethwa</string>
+    <string name="tap_to_use_location">Thinta ukusebenzisa indawo yakho yamanje</string>
     <string name="create_account">Dala i-akhawunti</string>
-    <string name="go_to_login">Unayo i-akhawunti? Ngena</string>
+    <string name="have_account_prompt">Unayo i-akhawunti?</string>
+    <string name="go_to_login">Ngena</string>
+    <string name="back">Emuva</string>
     <string name="error_display_name">Sicela ufake igama elibonakalayo.</string>
     <string name="error_passwords_mismatch">Amaphasiwedi awafani.</string>
     <string name="error_registration_failed">Ukubhalisa kwehlulekile.</string>
@@ -77,4 +87,28 @@
     <string name="time_just_now">Khona manje</string>
     <string name="time_minutes_ago">%1$d min edlule</string>
     <string name="time_hours_ago">%1$d hr edlule</string>
+
+    <string name="nearby_alerts">Izexwayiso eziseduze</string>
+    <string name="report_screen_title">Bika isigameko</string>
+    <string name="section_account">I-akhawunti</string>
+    <string name="section_preferences">Okuthandwayo</string>
+    <string name="severity_high">Phezulu</string>
+    <string name="severity_medium">Phakathi</string>
+    <string name="severity_low">Phansi</string>
+
+    <string name="alert_detail_title">Imininingwane yesexwayiso</string>
+    <string name="reported_by">Kubikwe ngu</string>
+    <string name="trust_score_format">Amaphoyinti okwethembeka: %1$d</string>
+    <string name="community_feedback">Impendulo yomphakathi</string>
+    <string name="feedback_counts">%1$d abaqinisekisile • %2$d abephikisile</string>
+    <string name="confirm">Qinisekisa</string>
+    <string name="dispute">Phikisa</string>
+    <string name="your_report_note">Lona ngumbiko wakho. Abanye abahlali bangawuqinisekisa noma bawuphikise.</string>
+    <string name="you_confirmed">Uwuqinisekisile lo mbiko.</string>
+    <string name="you_disputed">Uwuphikisile lo mbiko.</string>
+    <string name="error_vote_failed">Ayikwazanga ukurekhoda ivoti lakho. Hlola uxhumano uzame futhi.</string>
+    <string name="distance_km_away">%1$s km kude</string>
+    <string name="distance_m_away">%1$d m kude</string>
+    <string name="report_not_found">Lo mbiko awusatholakali.</string>
+    <string name="unknown_reporter">Akwaziwa</string>
 </resources>

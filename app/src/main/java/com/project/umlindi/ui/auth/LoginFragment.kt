@@ -34,6 +34,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.project.umlindi.R
 import com.project.umlindi.util.Validators
 import kotlinx.coroutines.launch
+import android.widget.Toast
 
 class LoginFragment : Fragment(R.layout.fragment_login) {
 
@@ -75,6 +76,24 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
 
         tvGoToRegister.setOnClickListener {
             findNavController().navigate(R.id.action_login_to_register)
+        }
+
+        view.findViewById<TextView>(R.id.tvForgotPassword).setOnClickListener {
+            hideError()
+            val email = etEmail.text?.toString()?.trim().orEmpty()
+            if (!Validators.isValidEmail(email)) {
+                showError(getString(R.string.error_enter_email_first))
+                return@setOnClickListener
+            }
+            auth.sendPasswordResetEmail(email)
+                .addOnSuccessListener {
+                    Log.d(TAG, "Password reset email sent")
+                    Toast.makeText(requireContext(), getString(R.string.reset_email_sent), Toast.LENGTH_LONG).show()
+                }
+                .addOnFailureListener { e ->
+                    Log.e(TAG, "Password reset failed", e)
+                    showError(e.localizedMessage ?: getString(R.string.error_login_failed))
+                }
         }
 
         btnGoogle.setOnClickListener { signInWithGoogle() }

@@ -1,20 +1,27 @@
 <resources>
     <string name="app_name">Umlindi</string>
 
+    <string name="splash_subtitle">Neighborhood Safety Alert</string>
+    <string name="splash_tagline">Keeping our communities safe, together.</string>
+
     <string name="login_title">Log in to Umlindi</string>
+    <string name="welcome_back">Welcome back!</string>
+    <string name="login_subtitle">Please log in to continue.</string>
     <string name="email_hint">Email</string>
     <string name="password_hint">Password</string>
     <string name="login_button">Log in</string>
-    <string name="go_to_register">Don\'t have an account? Register</string>
+    <string name="forgot_password">Forgot password?</string>
+    <string name="reset_email_sent">Password reset email sent. Check your inbox.</string>
+    <string name="error_enter_email_first">Enter your email address first.</string>
+    <string name="login_or">OR</string>
+    <string name="continue_with_google">Continue with Google</string>
+    <string name="continue_with_facebook">Continue with Facebook</string>
+    <string name="no_account_prompt">Don\'t have an account?</string>
+    <string name="go_to_register">Register</string>
     <string name="error_invalid_email">Please enter a valid email address.</string>
     <string name="error_short_password">Password must be at least 6 characters.</string>
     <string name="error_login_failed">Login failed. Please try again.</string>
-
-    <string name="login_or">OR</string>
-    <string name="continue_with_google">Continue with Google</string>
     <string name="error_google_failed">Google sign-in failed. Please try again.</string>
-
-    <string name="continue_with_facebook">Continue with Facebook</string>
     <string name="error_facebook_failed">Facebook sign-in failed. Please try again.</string>
     <string name="error_account_exists">An account already exists with this email using a different sign-in method. Log in with that method instead.</string>
 
@@ -25,8 +32,11 @@
     <string name="confirm_password_hint">Confirm password</string>
     <string name="use_current_location">Use current location</string>
     <string name="home_location_not_set">Home location not set</string>
+    <string name="tap_to_use_location">Tap to use your current location</string>
     <string name="create_account">Create Account</string>
-    <string name="go_to_login">Already have an account? Log in</string>
+    <string name="have_account_prompt">Already have an account?</string>
+    <string name="go_to_login">Log in</string>
+    <string name="back">Back</string>
     <string name="error_display_name">Please enter a display name.</string>
     <string name="error_passwords_mismatch">Passwords do not match.</string>
     <string name="error_registration_failed">Registration failed.</string>
@@ -77,4 +87,28 @@
     <string name="time_just_now">Just now</string>
     <string name="time_minutes_ago">%1$d min ago</string>
     <string name="time_hours_ago">%1$d hr ago</string>
+
+    <string name="nearby_alerts">Nearby Alerts</string>
+    <string name="report_screen_title">Report Incident</string>
+    <string name="section_account">Account</string>
+    <string name="section_preferences">Preferences</string>
+    <string name="severity_high">High</string>
+    <string name="severity_medium">Medium</string>
+    <string name="severity_low">Low</string>
+
+    <string name="alert_detail_title">Alert Detail</string>
+    <string name="reported_by">Reported by</string>
+    <string name="trust_score_format">Trust score: %1$d</string>
+    <string name="community_feedback">Community feedback</string>
+    <string name="feedback_counts">%1$d confirms • %2$d disputes</string>
+    <string name="confirm">Confirm</string>
+    <string name="dispute">Dispute</string>
+    <string name="your_report_note">This is your report. Other residents can confirm or dispute it.</string>
+    <string name="you_confirmed">You confirmed this report.</string>
+    <string name="you_disputed">You disputed this report.</string>
+    <string name="error_vote_failed">Could not record your vote. Check your connection and try again.</string>
+    <string name="distance_km_away">%1$s km away</string>
+    <string name="distance_m_away">%1$d m away</string>
+    <string name="report_not_found">This report is no longer available.</string>
+    <string name="unknown_reporter">Unknown</string>
 </resources>

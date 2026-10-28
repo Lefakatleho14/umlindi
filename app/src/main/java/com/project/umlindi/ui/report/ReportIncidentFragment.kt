@@ -66,10 +66,14 @@ class ReportIncidentFragment : Fragment(R.layout.fragment_report_incident) {
         val spinnerCategory = view.findViewById<Spinner>(R.id.spinnerCategory)
         val etDescription = view.findViewById<TextInputEditText>(R.id.etDescription)
         val tvCharCount = view.findViewById<TextView>(R.id.tvCharCount)
-        val btnUseLocation = view.findViewById<Button>(R.id.btnUseLocation)
+        val btnUseLocation = view.findViewById<View>(R.id.btnUseLocation)
         val tvError = view.findViewById<TextView>(R.id.tvError)
         val btnSubmit = view.findViewById<Button>(R.id.btnSubmit)
         val progressBar = view.findViewById<ProgressBar>(R.id.progressBar)
+
+        view.findViewById<View>(R.id.btnBack).setOnClickListener {
+            findNavController().popBackStack()
+        }
 
         spinnerCategory.adapter = ArrayAdapter(
             requireContext(),

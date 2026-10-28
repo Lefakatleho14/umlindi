@@ -19,10 +19,22 @@ object ReportFormatter {
         else -> R.string.category_other
     }
 
+    fun severityLabelRes(category: String): Int = when (category) {
+        "break_in" -> R.string.severity_high
+        "suspicious_activity" -> R.string.severity_medium
+        else -> R.string.severity_low
+    }
+
     fun severityColorHex(category: String): String = when (category) {
         "break_in" -> "#D32F2F"
         "suspicious_activity" -> "#F57C00"
         else -> "#FBC02D"
+    }
+
+    fun severityBadgeColorHex(category: String): String = when (category) {
+        "break_in" -> "#D32F2F"
+        "suspicious_activity" -> "#EF6C00"
+        else -> "#2E7D32"
     }
 
     fun timeAgo(timestampMillis: Long?, nowMillis: Long = System.currentTimeMillis()): TimeAgo {

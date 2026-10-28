@@ -37,4 +37,18 @@ class ReportFormatterTest {
     fun `null timestamp is unknown`() {
         assertEquals(TimeAgo.Unknown, ReportFormatter.timeAgo(null))
     }
+
+    @Test
+    fun `severity labels follow the category`() {
+        assertEquals(R.string.severity_high, ReportFormatter.severityLabelRes("break_in"))
+        assertEquals(R.string.severity_medium, ReportFormatter.severityLabelRes("suspicious_activity"))
+        assertEquals(R.string.severity_low, ReportFormatter.severityLabelRes("other"))
+    }
+
+    @Test
+    fun `badge colors use the readable variants`() {
+        assertEquals("#D32F2F", ReportFormatter.severityBadgeColorHex("break_in"))
+        assertEquals("#EF6C00", ReportFormatter.severityBadgeColorHex("suspicious_activity"))
+        assertEquals("#2E7D32", ReportFormatter.severityBadgeColorHex("load_shedding_risk"))
+    }
 }
