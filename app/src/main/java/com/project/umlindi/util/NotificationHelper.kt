@@ -9,6 +9,10 @@ import androidx.core.app.NotificationManagerCompat
 import com.project.umlindi.MainActivity
 import com.project.umlindi.UmlindiApp
 
+/**
+ * Builds and shows the in-app alert notification (Android Developers, n.d.c).
+ * The caller checks the notification permission first, which lint cannot see across files.
+ */
 object NotificationHelper {
 
     @SuppressLint("MissingPermission")

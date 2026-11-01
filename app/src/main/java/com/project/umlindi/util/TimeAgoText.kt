@@ -3,6 +3,8 @@ package com.project.umlindi.util
 import android.content.Context
 import com.project.umlindi.R
 
+/** Converts a TimeAgo value into translated text such as "5 min ago". */
+
 fun TimeAgo.toText(context: Context): String = when (this) {
     TimeAgo.Unknown -> ""
     TimeAgo.JustNow -> context.getString(R.string.time_just_now)

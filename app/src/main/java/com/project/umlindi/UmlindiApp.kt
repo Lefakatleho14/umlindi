@@ -5,6 +5,11 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.os.Build
 
+/**
+ * Application class. Creates the notification channel once at startup,
+ * because Android 8+ will not show notifications without one
+ * (Android Developers, n.d.c).
+ */
 class UmlindiApp : Application() {
 
     companion object {

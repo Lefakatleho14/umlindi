@@ -66,10 +66,16 @@ Unit tests cover core validation and formatting logic (see `app/src/test/`). Run
 ./gradlew test
 ```
 
-## Demo Video
+## References
 
-[Link to demo video — add once recorded]
+Android Developers (n.d.a) Schedule persistent work with WorkManager. Available at: https://developer.android.com/topic/libraries/architecture/workmanager (Accessed: 20 October 2026).
 
-## AI Tool Usage
+Android Developers (n.d.b) Save data in a local database using Room. Available at: https://developer.android.com/training/data-storage/room (Accessed: 20 October 2026).
 
-This project was developed with assistance from Claude (Anthropic) for architecture guidance, Kotlin/Firebase code, Gradle troubleshooting, and documentation drafting. See the accompanying AI usage write-up for details.
+Android Developers (n.d.c) Notifications overview. Available at: https://developer.android.com/develop/ui/views/notifications (Accessed: 20 October 2026).
+
+Android Developers (n.d.d) Navigation. Available at: https://developer.android.com/guide/navigation (Accessed: 20 October 2026).
+
+Android Developers (n.d.e) ConnectivityManager. Available at: https://developer.android.com/reference/android/net/ConnectivityManager (Accessed: 20 October 2026).
+
+Sinnott, R.W. (1984) 'Virtues of the haversine', Sky and Telescope, 68(2), p. 159.

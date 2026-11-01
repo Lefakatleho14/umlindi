@@ -4,6 +4,10 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 
+/**
+ * Checks whether the device currently has an internet-capable network.
+ * Uses ConnectivityManager and NetworkCapabilities (Android Developers, n.d.e).
+ */
 object NetworkUtils {
 
     fun isOnline(context: Context): Boolean {

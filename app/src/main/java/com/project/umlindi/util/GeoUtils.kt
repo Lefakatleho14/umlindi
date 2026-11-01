@@ -6,6 +6,10 @@ import kotlin.math.pow
 import kotlin.math.sin
 import kotlin.math.sqrt
 
+/**
+ * Distance between two GPS points using the haversine formula (Sinnott, 1984),
+ * which treats the Earth as a sphere. That is accurate enough for alert radii of a few kilometres.
+ */
 object GeoUtils {
 
     private const val EARTH_RADIUS_KM = 6371.0

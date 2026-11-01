@@ -13,6 +13,11 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.util.Date
 
+/**
+ * Background job that uploads reports saved offline. WorkManager runs it once a
+ * connection is available and retries it if anything fails
+ * (Android Developers, n.d.a).
+ */
 class ReportSyncWorker(context: Context, params: WorkerParameters) :
     CoroutineWorker(context, params) {
 

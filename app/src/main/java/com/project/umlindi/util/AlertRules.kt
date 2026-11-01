@@ -1,5 +1,10 @@
 package com.project.umlindi.util
 
+/**
+ * Decides whether a new report should notify a user. This is the app's
+ * "severity-aware alert radius" feature: serious incidents reach further
+ * than minor ones, so users are not flooded with distant low-priority alerts.
+ */
 object AlertRules {
 
     fun radiusMultiplier(category: String): Double = when (category) {

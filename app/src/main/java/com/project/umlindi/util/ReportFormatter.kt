@@ -3,6 +3,8 @@ package com.project.umlindi.util
 import com.project.umlindi.R
 import java.util.concurrent.TimeUnit
 
+/** How long ago a report was made, as data. The screen turns it into translated text. */
+
 sealed interface TimeAgo {
     data object Unknown : TimeAgo
     data object JustNow : TimeAgo
@@ -10,6 +12,11 @@ sealed interface TimeAgo {
     data class Hours(val count: Long) : TimeAgo
 }
 
+/**
+ * Turns stored report values into display information. It returns string
+ * resource ids instead of text, so the same code works in every language
+ * and can be unit tested without Android.
+ */
 object ReportFormatter {
 
     fun categoryLabelRes(category: String): Int = when (category) {
@@ -36,6 +43,8 @@ object ReportFormatter {
         "suspicious_activity" -> "#EF6C00"
         else -> "#2E7D32"
     }
+
+    /** nowMillis is a parameter so tests can pass a fixed time instead of the real clock. */
 
     fun timeAgo(timestampMillis: Long?, nowMillis: Long = System.currentTimeMillis()): TimeAgo {
         if (timestampMillis == null) return TimeAgo.Unknown
