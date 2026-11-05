@@ -16,6 +16,16 @@ Built as part of an IIE academic Portfolio of Evidence (PoE), following a Resear
 - **Push notifications** *(Final PoE)* — Firebase Cloud Messaging alerts for nearby incidents
 - **Multi-language support** *(Final PoE)* — English, isiZulu, and Sesotho
 
+## Screenshots
+
+<img width="317" height="475" alt="image" src="https://github.com/user-attachments/assets/84feb44e-aeab-4619-9ca7-28deb67a46de" />
+<img width="284" height="440" alt="image" src="https://github.com/user-attachments/assets/5dff8a94-17ba-4f8f-91e1-d5d1451d4e5e" />
+<img width="314" height="469" alt="image" src="https://github.com/user-attachments/assets/dd6e20d5-e2e0-47e7-aca1-9c884afdff86" />
+<img width="272" height="463" alt="image" src="https://github.com/user-attachments/assets/0cd8e3a5-576a-4058-8492-eedde06c5cff" />
+<img width="238" height="418" alt="image" src="https://github.com/user-attachments/assets/c0d26d5a-2e9f-468c-9b1b-7bb3b289bbe4" />
+<img width="210" height="367" alt="image" src="https://github.com/user-attachments/assets/38894f9f-a717-4c6b-85d3-727a3fe65c9f" />
+
+
 ## Tech Stack
 
 - **Language:** Kotlin
@@ -65,6 +75,8 @@ Unit tests cover core validation and formatting logic (see `app/src/test/`). Run
 ```
 ./gradlew test
 ```
+## Video link
+Youtube: https://youtu.be/jh4vaomQMEQ 
 
 ## References
 
